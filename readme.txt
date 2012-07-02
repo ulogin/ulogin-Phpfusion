@@ -18,7 +18,7 @@ uLogin Ч это инструмент, который позвол€ет пользовател€м получить единый доступ 
 
 2) - ¬ файл infusions/user_info_panel/user_info_panel.php ниже формы авторизации (после echo "</form>\n<br />\n";) вставл€ем:
 		echo '<script src="http://ulogin.ru/js/ulogin.js"></script>
-			<div id="uLogin" x-ulogin-params="display=small&fields=first_name,last_name,photo,email,bdate,nickname,city&providers=vkontakte,odnoklassniki,mailru,facebook&hidden=twitter,google,yandex,livejournal,openid&redirect_uri='.$ulogin_url.'"></div>
+			<div id="uLogin" x-ulogin-params="display=small&fields=first_name,last_name,photo,email,bdate,nickname,city&providers=vkontakte,odnoklassniki,mailru,facebook&hidden=other&redirect_uri='.$ulogin_url.'"></div>
 			<br>';
 
 3) - ¬ файл /maincore.php добавл€ем в конец:
