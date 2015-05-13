@@ -18,7 +18,7 @@ License: GNU General Public License, version 2
 - Чтобы установить панель синхронизации в профиль пользователя необходимо в файл edit_profile.php, который находится в корневой папке, добавить строку:
 
 
-	include_once INFUSIONS."ulogin_panel/ulogin_sync.php";
+		include_once INFUSIONS."ulogin_panel/ulogin_sync.php";
 
 Например, после 59 строки:
 
