@@ -43,7 +43,7 @@ else
 	echo '<div class="profile_category_name tbl2" style="max-width: 500px;margin: 0 auto;"><strong>'.$locale['SB_sync_acc_title'].'</strong></div>';
 	echo '<div class="ulogin_synchronisation" style="max-width: 500px;margin: 0 auto;  text-align: center;">'.getSyncPanel().'</div>';
 	global $userdata;
-	$current_user = $userdata['user_id'];
+	$current_user = isset($userdata['user_id']) ? $userdata['user_id'] : 0;
 	$member_b = dbquery("SELECT * FROM ".DB_ulogin." where user_id=".$current_user);
 	if (dbrows($member_b) > 0)
 	{
@@ -210,6 +210,7 @@ function uloginCheckTokenError($u_user)
 function getUserIdByIdentity($identity)
 {
 	$result = dbquery("SELECT user_id FROM ".DB_ulogin." WHERE identity = '".mysql_real_escape_string($identity)."'");
+	$user_id['user_id'] = '';
 	if (dbrows($result))
 	{
 		$user_id = dbarray($result);
@@ -259,7 +260,7 @@ function uloginRegistrationUser($u_user, $in_db = 0)
 	// $check_m_user == true -> есть пользователь с таким email
 	$check_m_user = $user_id > 0 ? true : false;
 	global $userdata;
-	$current_user = $userdata['user_id'];
+	$current_user = isset($userdata['user_id']) ? $userdata['user_id'] : 0;
 	// $is_logged_in == true -> ползователь онлайн
 	$is_logged_in = $current_user > 0 ? true : false;
 	if (($check_m_user == false) && !$is_logged_in)
@@ -272,7 +273,7 @@ function uloginRegistrationUser($u_user, $in_db = 0)
 		else $u_user['bdate'] = '';
 		global $settings;
 		$user_login = ulogin_generateNickname($u_user['first_name'], $u_user['last_name'], $u_user['nickname'], $u_user['bdate']);
-		$settings['reg_group_ulogin'] = intval($settings['reg_group_ulogin']) ? intval($settings['reg_group_ulogin']) : '';
+//		$settings['reg_group_ulogin'] = intval($settings['reg_group_ulogin']) ? intval($settings['reg_group_ulogin']) : '';
 		require_once CLASSES."PasswordAuth.class.php";
 		$seed = PasswordAuth::getNewRandomSalt();
 		$alg = !empty($settings['password_algorithm']) ? $settings['password_algorithm'] : 'sha256';
@@ -289,7 +290,7 @@ function uloginRegistrationUser($u_user, $in_db = 0)
 		$user_location = $u_user['city'];
 		$time = time();
 		dbquery("INSERT INTO ".DB_PREFIX."users (user_name, user_salt, user_password, user_email, user_joined, user_lastvisit, user_rights, user_groups, user_level, user_threads, user_ip, user_sig, user_birthdate, user_location, user_web)
-										VALUES ('$user_login', '$seed', '$password', '".$u_user['email']."', '$time', '$time', '', '".$settings['reg_group_ulogin']."', '101', '', '".$_IP."', '', '".$u_user['bdate']."', '$user_location','".$u_user['profile']."')");
+										VALUES ('$user_login', '$seed', '$password', '".$u_user['email']."', '$time', '$time', '', '', '101', '', '".$_IP."', '', '".$u_user['bdate']."', '$user_location','".$u_user['profile']."')");
 		$u_id = dbquery("SELECT user_id FROM ".DB_PREFIX."users where user_name='".$user_login."'");
 		$arr_id = dbarray($u_id);
 		$user_id = $arr_id['user_id'];
@@ -500,7 +501,7 @@ function uloginCheckUserId($user_id)
 {
 	global $userdata;
 	global $locale;
-	$current_user = $userdata['user_id'];
+	$current_user = isset($userdata['user_id']) ? $userdata['user_id'] : 0;
 	if (($current_user > 0) && ($user_id > 0) && ($current_user != $user_id))
 	{
 		die($locale['SB_error1']._get_back_url());
@@ -517,7 +518,7 @@ function _uploadPhoto($url, $user_id)
 	global $settings;
 	$ext = strtolower(substr($url, -3));
 	if (!in_array($ext, array('jpg', 'jpeg', 'png', 'gif', 'bmp'))) $ext = 'jpg';
-	$tmpName = md5(rand(8)).'.'.$ext;
+	$tmpName = md5(rand(8,8)).'.'.$ext;
 	$res = @copy($url, IMAGES."avatars/".$tmpName);
 	if ($res)
 	{
@@ -627,7 +628,7 @@ function ulogin_get_current_page_url()
 function getSyncPanel($user_id = 0)
 {
 	global $userdata;
-	$current_user = $userdata['user_id'];
+	$current_user = isset($userdata['user_id']) ? $userdata['user_id'] : 0;
 	$user_id = empty($user_id) ? $current_user : $user_id;
 	if (empty($user_id)) return '';
 	$networks = getMultiByUserId($user_id);
