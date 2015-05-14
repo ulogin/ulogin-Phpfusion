@@ -40,7 +40,6 @@ if (!isset($_GET['page']) || $_GET['page'] != "settings") {
 
 	$inf_settings = get_settings("ulogin_panel");
 	opentable($locale['SB_settings']);
-	echo $nav;
 	echo "<form method='post' action='".FUSION_SELF.$aidlink."'>\n";
 	echo "<table cellpadding='0' cellspacing='0' align='center' class='tbl-border' style='width:300px; margin-top:20px;'>\n";
 	echo "<tr>\n";
