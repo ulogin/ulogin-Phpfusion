@@ -4,7 +4,7 @@ $locale['SB_title'] = "uLogin";
 $locale['SB_desc'] = "uLogin (Официальное дополнение)";
 $locale['SB_admin1'] = "Администрирование uLogin";
 
-// Shoutbox
+// uLogin
 $locale['SB_title'] = "Авторизация через Соц.Сети";
 
 // Settings
