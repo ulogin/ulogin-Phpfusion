@@ -25,9 +25,6 @@ if (!isset($_GET['page']) || $_GET['page'] != "settings") {
 		if (isset($_POST['uloginid2'])) {
 			$setting = set_setting("uloginid2", $_POST['uloginid2'], "ulogin_panel");
 		}
-		if (isset($_POST['uloginid2']) && ($_POST['uloginid2'] == 1 || $_POST['uloginid2'] == 0)) {
-			$setting = set_setting("uloginid2", $_POST['uloginid2'], "ulogin_panel");
-		}
 		redirect(FUSION_SELF.$aidlink."&amp;status=update_ok");
 	}
 
@@ -49,12 +46,6 @@ if (!isset($_GET['page']) || $_GET['page'] != "settings") {
 	echo "<td class='tbl1'>".$locale['SB_uloginid2']."</td>\n";
 	echo "<td class='tbl1'><input type='text' name='uloginid2' class='textbox' value='".$inf_settings['uloginid2']."' /></td>\n";
 	echo "</tr>\n<tr>\n";
-//	echo "<td class='tbl1'>".$locale['SB_ulogin_mail']."</td>\n";
-//	echo "<td class='tbl1'><select name='ulogin_mail' size='1' class='textbox'>";
-//	echo "<option value='1' ".($inf_settings['ulogin_mail'] == 1 ? "selected='selected'" : "").">".$locale['SB_yes']."</option>\n";
-//	echo "<option value='0'".($inf_settings['ulogin_mail'] == 0 ? "selected='selected'" : "").">".$locale['SB_no']."</option>\n";
-//	echo "</select></td>\n";
-//	echo "</tr>\n<tr>\n";
 	echo "<td class='tbl1' colspan='2' style='text-align:center;'><input type='submit' name='sb_settings' value='".$locale['SB_submit']."' class='button' /></td>\n";
 	echo "</tr>\n</table>\n";
 	echo "</form>\n";
