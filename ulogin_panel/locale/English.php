@@ -11,7 +11,6 @@ $locale['SB_title'] = "Авторизация через Соц.Сети";
 $locale['SB_settings'] = "Настройки uLogin";
 $locale['SB_uloginid1'] = "uLogin ID форма авторизации";
 $locale['SB_uloginid2'] = "uLogin ID форма синхронизации";
-$locale['SB_ulogin_mail'] = "Отправлять письмо<br/>о регистрации";
 $locale['SB_ulogin_back'] = "Назад";
 $locale['SB_yes'] = "Да";
 $locale['SB_no'] = "Нет";
